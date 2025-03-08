@@ -12,6 +12,8 @@
     "mongoose": "^7.0.3",
     "uuid": "^9.0.0"
   },
+  "type": "module"
+},
   "engines": {
     "node": "18.0",
     "npm": "11.2.0"
