@@ -14,6 +14,3 @@ function App() {
 }
 
 export default App;
-
-cd FrontEnd/src
-ls
