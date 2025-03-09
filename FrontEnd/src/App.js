@@ -25,8 +25,10 @@ function App() {
     <div className="app-container">
       <h1>Poop Earnings Tracker 💩💰</h1>
 
-      <SalaryInput setSalary={setSalary} />
-      
+      {/* Salary Input now stays on the same page and is always editable */}
+      <SalaryInput salary={salary} setSalary={setSalary} />
+
+      {/* Show Poop Timer and Earnings only after a salary is entered */}
       {salary && (
         <>
           <PoopTimer onEndSession={handleEndSession} isPooping={isPooping} setIsPooping={setIsPooping} />
