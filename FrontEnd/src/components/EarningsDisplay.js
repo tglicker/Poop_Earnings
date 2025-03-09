@@ -1,11 +1,10 @@
 import React from "react";
 
-const EarningsDisplay = ({ salary = 0, totalPoopTime = 0 }) => {
-  const earnings = (salary / 2080) * totalPoopTime; // Calculate earnings
-
+const EarningsDisplay = ({ totalTime, totalEarnings }) => {
   return (
-    <div>
-      <h2>Total Earnings: ${earnings.toFixed(2)}</h2>
+    <div className="earnings-display">
+      <h2>Total Earned While Pooping: ${totalEarnings.toFixed(2)}</h2>
+      <p>Total Time: {Math.floor(totalTime / 60)}m {totalTime % 60}s</p>
     </div>
   );
 };
