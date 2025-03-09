@@ -1,14 +1,25 @@
-import React from "react";
+mport React, { useState } from "react";
 
-const SalaryInput = ({ salary, setSalary }) => {
+const SalaryInput = ({ onSalaryChange }) => {
+  const [salary, setSalary] = useState("");
+
+  const handleSubmit = () => {
+    const parsedSalary = parseFloat(salary);
+    if (!isNaN(parsedSalary) && parsedSalary > 0) {
+      onSalaryChange(parsedSalary);
+    }
+  };
+
   return (
-    <div>
-      <label>Enter Your Salary:</label>
-      <input
-        type="number"
-        value={salary}
-        onChange={(e) => setSalary(e.target.value)}
+    <div className="salary-input-container">
+      <label>Enter Your Annual Salary:</label>
+      <input 
+        type="number" 
+        value={salary} 
+        onChange={(e) => setSalary(e.target.value)} 
+        placeholder="$50000" 
       />
+      <button className="save-button" onClick={handleSubmit}>Save Salary 💾</button>
     </div>
   );
 };
