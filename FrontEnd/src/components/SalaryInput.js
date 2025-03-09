@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 
-const SalaryInput = ({ setSalary }) => {
-  const [inputSalary, setInputSalary] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+const SalaryInput = ({ salary, setSalary }) => {
+  const [inputSalary, setInputSalary] = useState(salary || '');
+  const [isEditing, setIsEditing] = useState(true); // Start in edit mode
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const salaryValue = parseFloat(inputSalary);
     if (!isNaN(salaryValue) && salaryValue > 0) {
       setSalary(salaryValue);
-      setSubmitted(true);
+      setIsEditing(false);
     }
   };
 
   return (
     <div className="salary-input">
-      {!submitted ? (
+      {isEditing ? (
         <form onSubmit={handleSubmit}>
           <label>
             Enter your annual salary:
@@ -29,7 +29,10 @@ const SalaryInput = ({ setSalary }) => {
           <button type="submit">Submit</button>
         </form>
       ) : (
-        <p>Salary set successfully! 💰</p>
+        <div>
+          <p>Salary: ${salary.toLocaleString()} 💰</p>
+          <button onClick={() => setIsEditing(true)}>Edit Salary</button>
+        </div>
       )}
     </div>
   );
