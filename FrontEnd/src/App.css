@@ -1,72 +1,36 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #f8f9fa;
-}
-
 .app-container {
-  margin: 20px auto;
+  text-align: center;
   padding: 20px;
-  max-width: 400px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
-h1 {
-  font-size: 24px;
-  color: #333;
-}
-
-.salary-input label {
-  display: block;
-  margin-bottom: 5px;
+.salary-input {
+  margin-bottom: 20px;
 }
 
 .salary-input input {
-  width: 80%;
   padding: 8px;
-  margin-bottom: 10px;
-}
-
-.salary-input button {
-  padding: 8px 12px;
-  background: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.poop-timer {
-  margin-top: 15px;
+  margin: 5px;
+  font-size: 16px;
 }
 
 button {
-  padding: 10px;
-  margin: 5px;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
+  background-color: #ffcc00;
   border: none;
-}
-
-.start-btn {
-  background-color: #28a745;
-  color: white;
-}
-
-.end-btn {
-  background-color: #dc3545;
-  color: white;
-}
-
-.earnings-display {
-  margin-top: 20px;
+  padding: 10px 20px;
   font-size: 18px;
-  color: #444;
+  cursor: pointer;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: #ff9900;
+}
+
+.poop-timer {
+  margin-bottom: 20px;
 }
 
 .earnings-display h2 {
-  font-size: 20px;
-  margin-bottom: 5px;
+  margin: 10px 0;
 }
