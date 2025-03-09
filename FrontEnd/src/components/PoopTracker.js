@@ -2,43 +2,58 @@ import React, { useState } from "react";
 import SalaryInput from "./SalaryInput";
 import PoopTimer from "./PoopTimer";
 import EarningsDisplay from "./EarningsDisplay";
+import PoopLog from "./PoopLog";
 
 const PoopTracker = () => {
   const [salary, setSalary] = useState(null);
-  const [totalPoopTime, setTotalPoopTime] = useState(0); // Total seconds
-  const [totalEarnings, setTotalEarnings] = useState(0);
-  const [showSalaryInput, setShowSalaryInput] = useState(true);
+  const [totalPoopTime, setTotalPoopTime] = useState(0); // Total minutes
+  const [currentSessionEarnings, setCurrentSessionEarnings] = useState(0);
+  const [poopLog, setPoopLog] = useState([]);
+  const [salarySubmitted, setSalarySubmitted] = useState(false);
 
   const handleSalaryChange = (newSalary) => {
     setSalary(newSalary);
-    setShowSalaryInput(false);
+  };
+
+  const submitSalary = () => {
+    setSalarySubmitted(true);
   };
 
   const editSalary = () => {
-    setShowSalaryInput(true);
+    setSalarySubmitted(false);
   };
 
-  const logPoopSession = (seconds) => {
-    const earnings = ((salary / 2080) / 3600) * seconds; // Calculate per second
-    setTotalPoopTime((prevTime) => prevTime + seconds);
-    setTotalEarnings((prevEarnings) => prevEarnings + earnings);
+  const logPoopSession = (minutes) => {
+    if (salary) {
+      const earnings = (salary / 2080) * minutes;
+      setTotalPoopTime((prevTime) => prevTime + minutes);
+      setCurrentSessionEarnings(earnings);
+      setPoopLog((prevLog) => [
+        ...prevLog,
+        { date: new Date().toLocaleString(), minutes, earnings },
+      ]);
+    }
   };
 
   return (
     <div className="poop-tracker">
       <h1>Poop Earnings Tracker 💩💰</h1>
 
-      {showSalaryInput ? (
-        <SalaryInput onSalaryChange={handleSalaryChange} />
+      {!salarySubmitted ? (
+        <SalaryInput onSalaryChange={handleSalaryChange} submitSalary={submitSalary} />
       ) : (
-        <div className="salary-display">
-          <p>Annual Salary: ${salary.toLocaleString()} / yr</p>
-          <button className="edit-btn" onClick={editSalary}>Edit Salary ✏️</button>
+        <div>
+          <button className="edit-button" onClick={editSalary}>Edit Salary</button>
         </div>
       )}
 
       <PoopTimer salary={salary} logPoopSession={logPoopSession} />
-      <EarningsDisplay totalPoopTime={totalPoopTime} totalEarnings={totalEarnings} />
+      <EarningsDisplay 
+        salary={salary} 
+        totalPoopTime={totalPoopTime} 
+        currentSessionEarnings={currentSessionEarnings} 
+      />
+      <PoopLog log={poopLog} />
     </div>
   );
 };
