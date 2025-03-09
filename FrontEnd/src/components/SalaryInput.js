@@ -1,17 +1,12 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-const SalaryInput = ({ onSalaryChange, submitSalary }) => {
-  const [inputSalary, setInputSalary] = useState("");
-
-  const handleChange = (e) => {
-    setInputSalary(e.target.value);
-  };
+const SalaryInput = ({ setSalary }) => {
+  const [inputSalary, setInputSalary] = useState('');
 
   const handleSubmit = () => {
-    const salaryNumber = parseFloat(inputSalary);
-    if (!isNaN(salaryNumber) && salaryNumber > 0) {
-      onSalaryChange(salaryNumber);
-      submitSalary();
+    const parsedSalary = parseFloat(inputSalary);
+    if (!isNaN(parsedSalary) && parsedSalary > 0) {
+      setSalary(parsedSalary);
     }
   };
 
@@ -21,10 +16,10 @@ const SalaryInput = ({ onSalaryChange, submitSalary }) => {
       <input 
         type="number" 
         value={inputSalary} 
-        onChange={handleChange} 
-        placeholder="200000"
+        onChange={(e) => setInputSalary(e.target.value)} 
+        placeholder="e.g. 200000"
       />
-      <button className="save-button" onClick={handleSubmit}>Save Salary</button>
+      <button onClick={handleSubmit}>Save Salary</button>
     </div>
   );
 };
