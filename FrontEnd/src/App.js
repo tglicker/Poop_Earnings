@@ -1,17 +1,13 @@
 import React from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import SalaryInput from "./components/SalaryInput";
-import PoopTimer from "./components/PoopTimer";
-import EarningsDisplay from "./components/EarningsDisplay";
+import PoopTracker from "./components/PoopTracker"; // Use PoopTracker
 
 function App() {
   return (
     <div>
       <Header />
-      <SalaryInput />
-      <PoopTimer />
-      <EarningsDisplay />
+      <PoopTracker />
       <Footer />
     </div>
   );
