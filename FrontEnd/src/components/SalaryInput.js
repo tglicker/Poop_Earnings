@@ -17,7 +17,7 @@ const SalaryInput = ({ onSalaryChange }) => {
         type="number" 
         value={salary} 
         onChange={(e) => setSalary(e.target.value)} 
-        placeholder="$50000" 
+        placeholder="$150000" 
       />
       <button className="save-button" onClick={handleSubmit}>Save Salary 💾</button>
     </div>
