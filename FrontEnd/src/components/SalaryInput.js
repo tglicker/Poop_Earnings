@@ -1,27 +1,38 @@
 import React, { useState } from 'react';
 
 const SalaryInput = ({ setSalary }) => {
-  const [inputSalary, setInputSalary] = useState('');
+  const [inputSalary, setInputSalary] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = () => {
-    const parsedSalary = parseFloat(inputSalary);
-    if (!isNaN(parsedSalary) && parsedSalary > 0) {
-      setSalary(parsedSalary);
-    }
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const salaryValue = parseFloat(inputSalary);
+    if (!isNaN(salaryValue) && salaryValue > 0) {
+      setSalary(salaryValue);
+      setSubmitted(true);
+    }
+  };
 
-  return (
-    <div className="salary-input">
-      <label>Enter Your Annual Salary:</label>
-      <input 
-        type="number" 
-        value={inputSalary} 
-        onChange={(e) => setInputSalary(e.target.value)} 
-        placeholder="e.g. 200000"
-      />
-      <button onClick={handleSubmit}>Save Salary</button>
-    </div>
-  );
+  return (
+    <div className="salary-input">
+      {!submitted ? (
+        <form onSubmit={handleSubmit}>
+          <label>
+            Enter your annual salary:
+            <input 
+              type="number" 
+              value={inputSalary} 
+              onChange={(e) => setInputSalary(e.target.value)} 
+              required 
+            />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+      ) : (
+        <p>Salary set successfully! 💰</p>
+      )}
+    </div>
+  );
 };
 
 export default SalaryInput;
