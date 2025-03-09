@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import SalaryInput from "./SalaryInput";
 import PoopLog from "./PoopLog";
 import EarningsDisplay from "./EarningsDisplay";
+import PoopTimer from "./PoopTimer";
+
 
 const PoopTracker = () => {
   const [salary, setSalary] = useState(0);
