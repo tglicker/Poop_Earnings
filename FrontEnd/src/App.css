@@ -1,13 +1,73 @@
-/* App.css */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  text-align: center;
+  padding: 20px;
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+.tracker-container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: auto;
+}
+
+.tracker-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.salary-input-container, .salary-display {
+  margin-bottom: 15px;
+}
+
+.salary-input-container input {
+  padding: 8px;
+  font-size: 16px;
+  width: 80%;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.save-button, .edit-button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.poop-timer {
+  margin-top: 20px;
+}
+
+.start-poop, .end-poop {
+  font-size: 16px;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.start-poop {
+  background-color: #28a745;
+  color: white;
+}
+
+.end-poop {
+  background-color: #dc3545;
+  color: white;
+}
+
+.earnings-display {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
 }
