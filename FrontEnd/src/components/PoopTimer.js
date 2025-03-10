@@ -1,37 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from "react";
 
-const PoopTimer = ({ onEndSession, isPooping, setIsPooping }) => {
-  const [seconds, setSeconds] = useState(0);
+const PoopTimer = ({ salary, logPoopSession }) => {
+  const [isPooping, setIsPooping] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(0);
   const [intervalId, setIntervalId] = useState(null);
 
-  const handleStart = () => {
-    if (!isPooping) {
-      setIsPooping(true);
-      setSeconds(0);
-      const id = setInterval(() => setSeconds((prev) => prev + 1), 1000);
-      setIntervalId(id);
-    }
+  const startPoop = () => {
+    setIsPooping(true);
+    setElapsedTime(0);
+    const id = setInterval(() => {
+      setElapsedTime((prev) => prev + 1);
+    }, 1000);
+    setIntervalId(id);
   };
 
-  const handleEnd = () => {
+  const endPoop = () => {
+    setIsPooping(false);
     clearInterval(intervalId);
-    onEndSession(seconds / 60);
-    setSeconds(0);
+    logPoopSession(elapsedTime / 60);
   };
-
-  useEffect(() => {
-    return () => clearInterval(intervalId);
-  }, [intervalId]);
 
   return (
-    <div className="poop-timer">
+    <div>
+      <h2>Poop Timer</h2>
       {isPooping ? (
-        <>
-          <p>Current session time: {seconds} seconds</p>
-          <button onClick={handleEnd}>End Poop Session 🚽</button>
-        </>
+        <div>
+          <p>Time: {Math.floor(elapsedTime / 60)} min {elapsedTime % 60} sec</p>
+          <button onClick={endPoop}>💩 End Poop Session</button>
+        </div>
       ) : (
-        <button onClick={handleStart}>Start Poop Session 💩</button>
+        <button onClick={startPoop}>🚽 Start Poop Session</button>
       )}
     </div>
   );
