@@ -1,36 +1,40 @@
-.app-container {
+.tracker-container {
   text-align: center;
   padding: 20px;
-  font-family: Arial, sans-serif;
 }
 
-.salary-input {
-  margin-bottom: 20px;
+.input-container {
+  margin: 20px auto;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
-.salary-input input {
-  padding: 8px;
-  margin: 5px;
-  font-size: 16px;
+.input-field {
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  border: 2px solid #333;
+  border-radius: 5px;
 }
 
-button {
+.submit-btn,
+.edit-btn {
+  padding: 10px 15px;
+  font-size: 18px;
   background-color: #ffcc00;
   border: none;
-  padding: 10px 20px;
-  font-size: 18px;
+  border-radius: 5px;
   cursor: pointer;
-  margin: 10px;
 }
 
-button:hover {
-  background-color: #ff9900;
+.submit-btn:hover,
+.edit-btn:hover {
+  background-color: #ffaa00;
 }
 
-.poop-timer {
-  margin-bottom: 20px;
-}
-
-.earnings-display h2 {
-  margin: 10px 0;
+.earnings-container {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
 }
