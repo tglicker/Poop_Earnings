@@ -1,10 +1,13 @@
-import React from 'react';
+import React from "react";
 
-const EarningsDisplay = ({ totalEarnings, currentSessionEarnings }) => {
+const EarningsDisplay = ({ salary, totalPoopTime, currentSessionEarnings }) => {
+  const totalEarnings = salary ? ((salary / 2080) * totalPoopTime).toFixed(2) : "0.00";
+
   return (
-    <div className="earnings-display">
-      <h2>Current Session Earnings: ${currentSessionEarnings.toFixed(2)}</h2>
-      <h2>Total Earned While Pooping: ${totalEarnings.toFixed(2)}</h2>
+    <div>
+      <h2>Earnings</h2>
+      <p>Current Session Earnings: ${currentSessionEarnings.toFixed(2)}</p>
+      <p>Total Earned While Pooping: ${totalEarnings}</p>
     </div>
   );
 };
