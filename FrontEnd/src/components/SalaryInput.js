@@ -1,40 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const SalaryInput = ({ salary, setSalary }) => {
-  const [inputSalary, setInputSalary] = useState(salary || '');
-  const [isEditing, setIsEditing] = useState(true); // Start in edit mode
+const SalaryInput = ({ onSalaryChange, salary }) => {
+  const [inputSalary, setInputSalary] = useState(salary || "");
+
+  const handleChange = (e) => {
+    setInputSalary(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const salaryValue = parseFloat(inputSalary);
     if (!isNaN(salaryValue) && salaryValue > 0) {
-      setSalary(salaryValue);
-      setIsEditing(false);
+      onSalaryChange(salaryValue);
     }
   };
 
   return (
-    <div className="salary-input">
-      {isEditing ? (
-        <form onSubmit={handleSubmit}>
-          <label>
-            Enter your annual salary:
-            <input 
-              type="number" 
-              value={inputSalary} 
-              onChange={(e) => setInputSalary(e.target.value)} 
-              required 
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
-      ) : (
-        <div>
-          <p>Salary: ${salary.toLocaleString()} 💰</p>
-          <button onClick={() => setIsEditing(true)}>Edit Salary</button>
-        </div>
-      )}
-    </div>
+    <form onSubmit={handleSubmit} className="salary-input-container">
+      <input
+        type="number"
+        value={inputSalary}
+        onChange={handleChange}
+        placeholder="150000"  // 👻 Ghost text added back here!
+        className="salary-input"
+      />
+      <button type="submit" className="submit-salary-btn">Set Salary</button>
+    </form>
   );
 };
 
