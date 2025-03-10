@@ -25,20 +25,10 @@ const PoopTracker = () => {
     if (savedPoopLog) setPoopLog(JSON.parse(savedPoopLog));
   }, []);
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
+  const handleUsernameChange = (e) => setUsername(e.target.value);
+  const saveUsername = () => localStorage.setItem("username", username);
 
-  const saveUsername = () => {
-    if (username.trim()) {
-      localStorage.setItem("username", username);
-    }
-  };
-
-  const handleSalaryChange = (e) => {
-    setSalary(e.target.value);
-  };
-
+  const handleSalaryChange = (e) => setSalary(e.target.value);
   const submitSalary = (e) => {
     e.preventDefault();
     if (salary > 0) {
@@ -57,7 +47,6 @@ const PoopTracker = () => {
 
     setTotalPoopTime(newTotalTime);
     setPoopLog(newLog);
-
     localStorage.setItem("totalPoopTime", newTotalTime);
     localStorage.setItem("poopLog", JSON.stringify(newLog));
   };
@@ -67,7 +56,7 @@ const PoopTracker = () => {
       <h1>Poop Earnings Tracker</h1>
 
       {/* Username Input */}
-      {!username && (
+      {!username ? (
         <div className="input-container">
           <input
             type="text"
@@ -76,14 +65,12 @@ const PoopTracker = () => {
             onChange={handleUsernameChange}
             className="input-field"
           />
-          <button onClick={saveUsername} className="submit-btn">
-            Set Username
-          </button>
+          <button onClick={saveUsername} className="submit-btn">Set Username</button>
         </div>
-      )}
+      ) : null}
 
       {/* Salary Input */}
-      {username && !isSalarySet && (
+      {username && !isSalarySet ? (
         <form onSubmit={submitSalary} className="input-container">
           <input
             type="number"
@@ -94,7 +81,7 @@ const PoopTracker = () => {
           />
           <button type="submit" className="submit-btn">Set Salary</button>
         </form>
-      )}
+      ) : null}
 
       {/* Main UI (only visible after salary is set) */}
       {username && isSalarySet && (
