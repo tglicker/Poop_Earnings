@@ -1,30 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 
-const PoopLog = ({ logPoopSession }) => {
-  const [duration, setDuration] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (duration) {
-      logPoopSession(Number(duration));
-      setDuration("");
-    }
-  };
-
+const PoopLog = ({ log }) => {
   return (
     <div>
-      <h2>Log a Poop Session</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Minutes Spent:</label>
-        <input
-          type="number"
-          value={duration}
-          onChange={(e) => setDuration(e.target.value)}
-          min="1"
-          required
-        />
-        <button type="submit">Log</button>
-      </form>
+      <h2>Poop Log</h2>
+      <ul>
+        {log.map((session, index) => (
+          <li key={index}>
+            {session.date} - {session.minutes.toFixed(1)} min - ${session.earnings.toFixed(2)}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
