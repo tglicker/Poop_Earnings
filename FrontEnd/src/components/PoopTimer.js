@@ -17,7 +17,9 @@ const PoopTimer = ({ salary, logPoopSession }) => {
   const endPoop = () => {
     setIsPooping(false);
     clearInterval(intervalId);
-    logPoopSession(elapsedTime / 60);
+    
+    const minutes = elapsedTime / 60; // Convert seconds to minutes
+    logPoopSession(minutes);
   };
 
   return (
