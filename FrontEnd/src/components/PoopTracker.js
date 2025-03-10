@@ -9,6 +9,7 @@ const PoopTracker = () => {
   const [isSalarySet, setIsSalarySet] = useState(false);
   const [totalPoopTime, setTotalPoopTime] = useState(0);
   const [poopLog, setPoopLog] = useState([]);
+  const [isUsernameSet, setIsUsernameSet] = useState(false);
 
   useEffect(() => {
     const savedUsername = localStorage.getItem("username") || "";
@@ -16,19 +17,29 @@ const PoopTracker = () => {
     const savedPoopTime = localStorage.getItem("totalPoopTime");
     const savedPoopLog = localStorage.getItem("poopLog");
 
-    setUsername(savedUsername);
+    if (savedUsername) {
+      setUsername(savedUsername);
+      setIsUsernameSet(true); // Ensures username is "locked in" once set
+    }
     if (savedSalary) {
       setSalary(savedSalary);
-      setIsSalarySet(true); // Automatically set to true if salary exists
+      setIsSalarySet(true);
     }
     if (savedPoopTime) setTotalPoopTime(parseFloat(savedPoopTime));
     if (savedPoopLog) setPoopLog(JSON.parse(savedPoopLog));
   }, []);
 
   const handleUsernameChange = (e) => setUsername(e.target.value);
-  const saveUsername = () => localStorage.setItem("username", username);
+  
+  const saveUsername = () => {
+    if (username.trim() !== "") {
+      localStorage.setItem("username", username);
+      setIsUsernameSet(true);
+    }
+  };
 
   const handleSalaryChange = (e) => setSalary(e.target.value);
+  
   const submitSalary = (e) => {
     e.preventDefault();
     if (salary > 0) {
@@ -53,7 +64,7 @@ const PoopTracker = () => {
     <div className="tracker-container">
       <h1>Poop Earnings Tracker</h1>
 
-      {!username ? (
+      {!isUsernameSet ? (
         <div className="input-container">
           <input
             type="text"
@@ -66,7 +77,7 @@ const PoopTracker = () => {
         </div>
       ) : null}
 
-      {username && !isSalarySet ? (
+      {isUsernameSet && !isSalarySet ? (
         <form onSubmit={submitSalary} className="input-container">
           <input
             type="number"
@@ -79,7 +90,7 @@ const PoopTracker = () => {
         </form>
       ) : null}
 
-      {username && isSalarySet && (
+      {isUsernameSet && isSalarySet && (
         <>
           <button onClick={() => setIsSalarySet(false)} className="edit-btn">
             Edit Salary
