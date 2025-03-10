@@ -7,7 +7,8 @@ const PoopLog = ({ log }) => {
       <ul>
         {log.map((session, index) => (
           <li key={index}>
-            {session.date} - {session.minutes.toFixed(1)} min - ${session.earnings.toFixed(2)}
+            {session.date} - {Number(session.minutes).toFixed(1)} min - $
+            {Number(session.earnings).toFixed(2)}
           </li>
         ))}
       </ul>
