@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const SalaryInput = ({ onSalaryChange, salary }) => {
-  const [inputSalary, setInputSalary] = useState(salary || "");
+const SalaryInput = ({ onSalaryChange }) => {
+  const [inputSalary, setInputSalary] = useState("");
 
   const handleChange = (e) => {
     setInputSalary(e.target.value);
@@ -21,7 +21,7 @@ const SalaryInput = ({ onSalaryChange, salary }) => {
         type="number"
         value={inputSalary}
         onChange={handleChange}
-        placeholder="150000"  // 👻 Ghost text added back here!
+        placeholder="150000" // Ghost text added back
         className="salary-input"
       />
       <button type="submit" className="submit-salary-btn">Set Salary</button>
