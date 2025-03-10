@@ -19,7 +19,7 @@ const PoopTracker = () => {
     setUsername(savedUsername);
     if (savedSalary) {
       setSalary(savedSalary);
-      setIsSalarySet(true);
+      setIsSalarySet(true); // Automatically set to true if salary exists
     }
     if (savedPoopTime) setTotalPoopTime(parseFloat(savedPoopTime));
     if (savedPoopLog) setPoopLog(JSON.parse(savedPoopLog));
@@ -38,8 +38,8 @@ const PoopTracker = () => {
   };
 
   const logPoopSession = (minutes) => {
-    const hourlyRate = salary / 2080; // Convert annual salary to hourly wage
-    const earnings = (hourlyRate * (minutes / 60)).toFixed(2); // Calculate earnings accurately
+    const hourlyRate = salary / 2080;
+    const earnings = (hourlyRate * (minutes / 60)).toFixed(2);
     const newTotalTime = totalPoopTime + minutes;
     const newLog = [...poopLog, { date: new Date().toLocaleString(), minutes, earnings }];
 
@@ -53,7 +53,6 @@ const PoopTracker = () => {
     <div className="tracker-container">
       <h1>Poop Earnings Tracker</h1>
 
-      {/* Username Input */}
       {!username ? (
         <div className="input-container">
           <input
@@ -67,7 +66,6 @@ const PoopTracker = () => {
         </div>
       ) : null}
 
-      {/* Salary Input (Hidden After Submission) */}
       {username && !isSalarySet ? (
         <form onSubmit={submitSalary} className="input-container">
           <input
@@ -81,7 +79,6 @@ const PoopTracker = () => {
         </form>
       ) : null}
 
-      {/* Main UI (only visible after salary is set) */}
       {username && isSalarySet && (
         <>
           <button onClick={() => setIsSalarySet(false)} className="edit-btn">
