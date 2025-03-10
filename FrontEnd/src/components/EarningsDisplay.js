@@ -5,7 +5,7 @@ const EarningsDisplay = ({ salary, totalPoopTime }) => {
     return <p>Please enter a valid salary to calculate earnings.</p>;
   }
 
-  const totalEarnings = ((salary / 2080) * totalPoopTime).toFixed(2);
+  const totalEarnings = ((salary / 2080 / 60) * totalPoopTime).toFixed(2);
 
   return (
     <div className="earnings-container">
