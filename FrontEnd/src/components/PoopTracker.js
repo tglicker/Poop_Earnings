@@ -47,7 +47,7 @@ const PoopTracker = () => {
   };
 
   const logPoopSession = (minutes) => {
-    const earnings = Number(((salary / 2080) * minutes).toFixed(2));
+    const earnings = Number(((salary / 2080 /60) * minutes).toFixed(2));
     const newTotalTime = totalPoopTime + minutes;
     const newLog = [
       ...poopLog,
@@ -85,7 +85,7 @@ const PoopTracker = () => {
         <form onSubmit={submitSalary} className="input-container">
           <input
             type="number"
-            placeholder="150000"
+            placeholder="100000"
             value={salary}
             onChange={handleSalaryChange}
             className="input-field"
