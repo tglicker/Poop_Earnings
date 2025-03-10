@@ -1,13 +1,16 @@
 import React from "react";
 
-const EarningsDisplay = ({ salary, totalPoopTime, currentSessionEarnings }) => {
-  const totalEarnings = salary ? ((salary / 2080) * totalPoopTime).toFixed(2) : "0.00";
+const EarningsDisplay = ({ salary, totalPoopTime }) => {
+  if (!salary || isNaN(salary)) {
+    return <p>Please enter a valid salary to calculate earnings.</p>;
+  }
+
+  const totalEarnings = ((salary / 2080) * totalPoopTime).toFixed(2);
 
   return (
-    <div>
-      <h2>Earnings</h2>
-      <p>Current Session Earnings: ${currentSessionEarnings.toFixed(2)}</p>
-      <p>Total Earned While Pooping: ${totalEarnings}</p>
+    <div className="earnings-container">
+      <h2>Poop Earnings</h2>
+      <p>Total Earned: ${totalEarnings}</p>
     </div>
   );
 };
