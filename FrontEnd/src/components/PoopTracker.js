@@ -1,47 +1,54 @@
 import React, { useState, useEffect } from "react";
-import SalaryInput from "./SalaryInput";
 import PoopTimer from "./PoopTimer";
 import EarningsDisplay from "./EarningsDisplay";
 import PoopLog from "./PoopLog";
 
 const PoopTracker = () => {
-  const [username, setUsername] = useState(""); // Store username
-  const [salary, setSalary] = useState(null); // Store salary per user
-  const [totalPoopTime, setTotalPoopTime] = useState(0); // Total time in minutes
-  const [poopLog, setPoopLog] = useState([]); // Stores past poops
-  const [isSalarySet, setIsSalarySet] = useState(false); // Track if salary was submitted
+  const [username, setUsername] = useState("");
+  const [salary, setSalary] = useState("");
+  const [isSalarySet, setIsSalarySet] = useState(false);
+  const [totalPoopTime, setTotalPoopTime] = useState(0);
+  const [poopLog, setPoopLog] = useState([]);
 
   useEffect(() => {
-    // Load user data from localStorage
     const savedUsername = localStorage.getItem("username") || "";
     const savedSalary = localStorage.getItem("salary");
     const savedPoopTime = localStorage.getItem("totalPoopTime");
     const savedPoopLog = localStorage.getItem("poopLog");
 
     setUsername(savedUsername);
-    if (savedSalary) setSalary(parseFloat(savedSalary));
+    if (savedSalary) {
+      setSalary(savedSalary);
+      setIsSalarySet(true);
+    }
     if (savedPoopTime) setTotalPoopTime(parseFloat(savedPoopTime));
     if (savedPoopLog) setPoopLog(JSON.parse(savedPoopLog));
-
-    setIsSalarySet(!!savedSalary); // Hide salary input if already set
   }, []);
-
-  const handleSalaryChange = (newSalary) => {
-    setSalary(newSalary);
-    localStorage.setItem("salary", newSalary);
-    setIsSalarySet(true); // Hide input after setting salary
-  };
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
 
   const saveUsername = () => {
-    localStorage.setItem("username", username);
+    if (username.trim()) {
+      localStorage.setItem("username", username);
+    }
+  };
+
+  const handleSalaryChange = (e) => {
+    setSalary(e.target.value);
+  };
+
+  const submitSalary = (e) => {
+    e.preventDefault();
+    if (salary > 0) {
+      localStorage.setItem("salary", salary);
+      setIsSalarySet(true);
+    }
   };
 
   const logPoopSession = (minutes) => {
-    const earnings = (salary / 2080) * minutes;
+    const earnings = ((salary / 2080) * minutes).toFixed(2);
     const newTotalTime = totalPoopTime + minutes;
     const newLog = [
       ...poopLog,
@@ -51,7 +58,6 @@ const PoopTracker = () => {
     setTotalPoopTime(newTotalTime);
     setPoopLog(newLog);
 
-    // Save in localStorage per user
     localStorage.setItem("totalPoopTime", newTotalTime);
     localStorage.setItem("poopLog", JSON.stringify(newLog));
   };
@@ -60,25 +66,40 @@ const PoopTracker = () => {
     <div className="tracker-container">
       <h1>Poop Earnings Tracker</h1>
 
+      {/* Username Input */}
       {!username && (
-        <div className="username-container">
+        <div className="input-container">
           <input
             type="text"
             placeholder="Enter Username"
             value={username}
             onChange={handleUsernameChange}
+            className="input-field"
           />
-          <button onClick={saveUsername}>Set Username</button>
+          <button onClick={saveUsername} className="submit-btn">
+            Set Username
+          </button>
         </div>
       )}
 
+      {/* Salary Input */}
       {username && !isSalarySet && (
-        <SalaryInput onSalaryChange={handleSalaryChange} />
+        <form onSubmit={submitSalary} className="input-container">
+          <input
+            type="number"
+            placeholder="150000"
+            value={salary}
+            onChange={handleSalaryChange}
+            className="input-field"
+          />
+          <button type="submit" className="submit-btn">Set Salary</button>
+        </form>
       )}
 
+      {/* Main UI (only visible after salary is set) */}
       {username && isSalarySet && (
         <>
-          <button onClick={() => setIsSalarySet(false)} className="edit-salary-btn">
+          <button onClick={() => setIsSalarySet(false)} className="edit-btn">
             Edit Salary
           </button>
           <PoopTimer salary={salary} logPoopSession={logPoopSession} />
