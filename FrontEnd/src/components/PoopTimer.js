@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./PoopTimer.css"; // Ensure to create this file for custom styles
 
 const PoopTimer = ({ salary, logPoopSession }) => {
   const [isRunning, setIsRunning] = useState(false);
@@ -38,9 +39,8 @@ const PoopTimer = ({ salary, logPoopSession }) => {
   useEffect(() => {
     localStorage.setItem("poopElapsedTime", elapsedTime);
     
-    // Calculate real-time earnings
     if (salary) {
-      const hourlyRate = salary / 2080; // Assume 40 hours/week, 52 weeks
+      const hourlyRate = salary / 2080;
       setRealTimeEarnings(((hourlyRate / 3600) * elapsedTime).toFixed(2));
     }
   }, [elapsedTime, salary]);
@@ -60,17 +60,18 @@ const PoopTimer = ({ salary, logPoopSession }) => {
 
   return (
     <div className="timer-container">
-      <h2>Current Poop Session</h2>
-      <p>{Math.floor(elapsedTime / 60)} min {elapsedTime % 60} sec</p>
-      <p>Real-Time Earnings: ${realTimeEarnings}</p>
+      <h2 className="title">🚽 Current Poop Session 💩</h2>
+      <p className="timer-text">{Math.floor(elapsedTime / 60)} min {elapsedTime % 60} sec</p>
+      <p className="earnings-text">💰 Earnings: <strong>${realTimeEarnings}</strong></p>
       {!isRunning ? (
-        <button onClick={startTimer} className="start-btn">Start</button>
+        <button onClick={startTimer} className="start-btn">🚀 Start Pooping</button>
       ) : (
-        <button onClick={stopTimer} className="stop-btn">Stop</button>
+        <button onClick={stopTimer} className="stop-btn">⏹ Stop Poop</button>
       )}
     </div>
   );
 };
 
 export default PoopTimer;
+
 
