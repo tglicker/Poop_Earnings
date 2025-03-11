@@ -1,0 +1,55 @@
+/* PoopTimer.css - Fun & Modern Styling */
+.timer-container {
+  background: linear-gradient(135deg, #ffcc70, #ff6666);
+  color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  margin: auto;
+  font-family: "Comic Sans MS", "Poppins", sans-serif;
+}
+
+.title {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.timer-text {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.earnings-text {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.start-btn, .stop-btn {
+  background: #fff;
+  color: #ff6666;
+  border: none;
+  padding: 15px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.start-btn:hover {
+  background: #ff6666;
+  color: white;
+}
+
+.stop-btn {
+  background: #ff4444;
+  color: white;
+}
+
+.stop-btn:hover {
+  background: #ff2222;
+}
