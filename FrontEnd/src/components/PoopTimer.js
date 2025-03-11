@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import "./PoopTimer.css"; // Ensure to create this file for custom styles
+import "./PoopTimer.css";
 
 const PoopTimer = ({ salary, logPoopSession }) => {
   const [isRunning, setIsRunning] = useState(false);
-  const [startTime, setStartTime] = useState(null);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [realTimeEarnings, setRealTimeEarnings] = useState(0);
+  const [startTime, setStartTime] = useState(null);
 
   useEffect(() => {
     const savedStartTime = localStorage.getItem("poopStartTime");
@@ -14,8 +14,9 @@ const PoopTimer = ({ salary, logPoopSession }) => {
     if (savedStartTime) {
       const previousStart = parseInt(savedStartTime, 10);
       const now = Date.now();
-      const timeDiff = Math.floor((now - previousStart) / 1000);
+      const timeDiff = Math.floor((now - previousStart) / 1000); // Time since last session
       setElapsedTime(parseInt(savedElapsedTime, 10) + timeDiff);
+      setStartTime(previousStart);
       setIsRunning(true);
     }
   }, []);
@@ -46,14 +47,17 @@ const PoopTimer = ({ salary, logPoopSession }) => {
   }, [elapsedTime, salary]);
 
   const startTimer = () => {
+    const now = Date.now();
     setIsRunning(true);
-    setStartTime(Date.now());
+    setStartTime(now);
+    localStorage.setItem("poopStartTime", now);
   };
 
   const stopTimer = () => {
     setIsRunning(false);
     logPoopSession(elapsedTime / 60);
     setElapsedTime(0);
+    localStorage.removeItem("poopStartTime");
     localStorage.removeItem("poopElapsedTime");
     setRealTimeEarnings(0);
   };
@@ -73,5 +77,6 @@ const PoopTimer = ({ salary, logPoopSession }) => {
 };
 
 export default PoopTimer;
+
 
 
