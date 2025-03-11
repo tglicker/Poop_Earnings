@@ -15,7 +15,7 @@ const PoopTimer = ({ salary, logPoopSession }) => {
       const previousStart = parseInt(savedStartTime, 10);
       const now = Date.now();
       const timeDiff = Math.floor((now - previousStart) / 1000); // Time since last session
-      setElapsedTime(parseInt(savedElapsedTime, 10) + timeDiff);
+      setElapsedTime((prev) => (savedElapsedTime ? parseInt(savedElapsedTime, 10) + timeDiff : timeDiff));
       setStartTime(previousStart);
       setIsRunning(true);
     }
@@ -77,6 +77,7 @@ const PoopTimer = ({ salary, logPoopSession }) => {
 };
 
 export default PoopTimer;
+
 
 
 
